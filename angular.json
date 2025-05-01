@@ -3,5 +3,153 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "crc-side-menu": {
+      "projectType": "library",
+      "root": "projects/crc-side-menu",
+      "sourceRoot": "projects/crc-side-menu/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/crc-side-menu/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/crc-side-menu/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/crc-side-menu/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/crc-side-menu/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/crc-side-menu/**/*.ts",
+              "projects/crc-side-menu/**/*.html"
+            ],
+            "eslintConfig": "projects/crc-side-menu/eslint.config.js"
+          }
+        }
+      }
+    },
+    "crc-testbed-app": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/crc-testbed-app",
+      "sourceRoot": "projects/crc-testbed-app/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": "dist/crc-testbed-app",
+            "index": "projects/crc-testbed-app/src/index.html",
+            "browser": "projects/crc-testbed-app/src/main.ts",
+            "polyfills": [
+              "zone.js"
+            ],
+            "tsConfig": "projects/crc-testbed-app/tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/crc-testbed-app/public"
+              }
+            ],
+            "styles": [
+              "projects/crc-testbed-app/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "crc-testbed-app:build:production"
+            },
+            "development": {
+              "buildTarget": "crc-testbed-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/crc-testbed-app/tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/crc-testbed-app/public"
+              }
+            ],
+            "styles": [
+              "projects/crc-testbed-app/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/crc-testbed-app/**/*.ts",
+              "projects/crc-testbed-app/**/*.html"
+            ],
+            "eslintConfig": "projects/crc-testbed-app/eslint.config.js"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false,
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   }
 }

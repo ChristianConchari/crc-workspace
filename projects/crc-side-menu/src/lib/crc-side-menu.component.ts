@@ -16,6 +16,8 @@ export enum TitleColor {
 })
 export class CrcSideMenuComponent {
   isAuthenticated = input(false);
+  title = input('CRC');
+  subTitle = input('Corp');
 
   titleColor = input<TitleColor>(TitleColor.purple);
 
